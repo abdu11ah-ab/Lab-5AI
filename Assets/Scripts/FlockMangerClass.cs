@@ -40,6 +40,8 @@ namespace FlockingDemo
                         UnityEngine.Random.Range(-boidLimits.y, boidLimits.y),
                         UnityEngine.Random.Range(-boidLimits.z, boidLimits.z)
                     );
+                // [Skill 24] Populate class properties in an instantiated object from the instantiating class
+                //instantiated the boid, grabbed its script component, and set the myManager variable immediately.
                 allBoids[i] = Instantiate(boidPrefab, pos, Quaternion.identity);
                 allBoids[i].GetComponent<FlockClass>().myManager = this;
             }

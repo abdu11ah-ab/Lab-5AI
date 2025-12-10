@@ -149,15 +149,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boidPrefab: {fileID: 1733855665772604, guid: b0489fdb6d64a4a4ba8e194e561d60cd, type: 3}
-  numBoids: 20
+  numBoids: 70
   boidLimits: {x: 5, y: 5, z: 5}
   flockBoundary: {x: 10, y: 10, z: 10}
   allBoids: []
-  minSpeed: 0
-  maxSpeed: 0
-  neighbourDistance: 1
-  neighbourCollision: 0
-  rotationSpeed: 0
+  minSpeed: 1.08
+  maxSpeed: 1.81
+  neighbourDistance: 1.63
+  neighbourCollision: 0.44
+  rotationSpeed: 1.73
 --- !u!4 &39828239
 Transform:
   m_ObjectHideFlags: 0

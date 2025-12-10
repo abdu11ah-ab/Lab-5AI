@@ -1,5 +1,4 @@
 using System;
-using System.Security.Cryptography;
 using UnityEngine;
 
 namespace FlockingDemo
@@ -36,6 +35,8 @@ namespace FlockingDemo
             Bounds b = new Bounds(myManager.transform.position, myManager.flockBoundary * 2);
 
             // If we are OUTSIDE the bounds, we must turn back
+            //[Skill31] Programmatically use Bounds to limit GameObject movement
+            //created a Bounds object and checked .Contains()
             if (!b.Contains(transform.position))
             {
                 turning = true;
@@ -50,7 +51,8 @@ namespace FlockingDemo
             // 2. Obstacle Avoidance (SphereCast)
             RaycastHit hit;
             // Cast a sphere forward to detect obstacles
-            if (Physics.SphereCast(transform.position, 0.2f, transform.forward, out hit, 0.35f))
+            //[Skill 33] Determine an impending collision and execute code to avoid it.
+            if (Physics.SphereCast(transform.position, 0.2f, transform.forward, out hit, 2.0f))
             {
                 turning = true;
                 // Reflect our current forward vector off the hit normal to find the new direction
@@ -77,9 +79,8 @@ namespace FlockingDemo
                 ApplyRules();
             }
 
-            // LAB 5 ADDITION: Natural movement probability
+            // Natural movement probability
             // Recalculate speed 10% of the time to make it look less robotic
-            // FIX: Explicitly use UnityEngine.Random
             if (UnityEngine.Random.Range(0, 100) < 10)
             {
                 speed = UnityEngine.Random.Range(myManager.minSpeed, myManager.maxSpeed);
@@ -103,6 +104,7 @@ namespace FlockingDemo
 
             foreach (GameObject go in gos)
             {
+                // [Skill 26] Skip an item in a foreach loop
                 // if this boid is me, ignore it.
                 if (go == this.gameObject) continue;
 
@@ -112,6 +114,7 @@ namespace FlockingDemo
                 // is the boid close enough for me to care?
                 if (nDistance < myManager.neighbourDistance)
                 {
+                    // [Skill 22] Add one variable to another by only typing each of their names once
                     vCenter += go.transform.position;
                     groupSize++;
 
@@ -119,6 +122,7 @@ namespace FlockingDemo
                     if (nDistance < myManager.neighbourCollision)
                     {
                         // go the opposite way.
+                        // [Skill 22] Add one variable to another by only typing each of their names once
                         vAvoid += (this.transform.position - go.transform.position);
                     }
 
@@ -130,6 +134,7 @@ namespace FlockingDemo
 
             if (groupSize > 0)
             {
+                //[Skill32] Calculate the average of a transform property.
                 vCenter = vCenter / groupSize;
                 speed = gSpeed / groupSize;
 
